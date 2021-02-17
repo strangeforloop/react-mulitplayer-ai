@@ -1,25 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import { Board } from './components/Board';
+import { GameHeader } from './components/GameHeader';
 
-function App() {
+const App = () => {
+  const BOARD_DIMENSION = 4;
+  const [currentPlayer, setCurrentPlayer] = useState('playerOne');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GameHeader currentPlayer={currentPlayer}/>
+      <div className="App-header">
+        <Board
+          boardDimension={BOARD_DIMENSION}
+          handleTurn={setCurrentPlayer}
+          currentPlayer={currentPlayer}
+        />
+      </div>
     </div>
   );
 }
 
-export default App;
+export { App };
