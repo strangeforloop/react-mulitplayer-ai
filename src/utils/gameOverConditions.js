@@ -1,12 +1,13 @@
-const BOARD_DIMENSION = 3;
+import { getBoardDimension } from '../App';
+
 const get1DpositionFrom2Dmatrix = (board, rowIndex, columnIndex) => {
     return (rowIndex * Math.sqrt(board.length)) + columnIndex;
 };
 
 const winOnRow = (board) => {
-  for (let i = 0; i < BOARD_DIMENSION; i++) {
+  for (let i = 0; i < getBoardDimension(); i++) {
     const set = new Set();
-    for (let j = 0; j < BOARD_DIMENSION; j++) {
+    for (let j = 0; j < getBoardDimension(); j++) {
       const position = get1DpositionFrom2Dmatrix(board, i, j);
       set.add(board[position]);
     }
@@ -20,9 +21,9 @@ const winOnRow = (board) => {
 };
 
 const winOnColumn = (board) => {
-  for (let i = 0; i < BOARD_DIMENSION; i++) {
+  for (let i = 0; i < getBoardDimension(); i++) {
     const set = new Set();
-    for (let j = 0; j < BOARD_DIMENSION; j++) {
+    for (let j = 0; j < getBoardDimension(); j++) {
       const position = get1DpositionFrom2Dmatrix(board, j, i);
       set.add(board[position]);
     }
@@ -36,22 +37,24 @@ const winOnColumn = (board) => {
 };
 
 const winOnDiagonal = (board) => {
-  let topLeftBottomRight = new Set();
-  let topRightBottomLeft = new Set();
+  let topLeftBottomRightDiagonal = new Set();
+  let topRightBottomLeftDiagonal = new Set();
 
+  // To Do: Fix math to not hard code numbers
+  // Right now, this only works if the dimension is 3.
   for (let i = 0; i < 9; i = i + 4) {
-    topLeftBottomRight.add(board[i]);
+    topLeftBottomRightDiagonal.add(board[i]);
   }
 
-  if (topLeftBottomRight.size === 1 && !topLeftBottomRight.has(null)) {
+  if (topLeftBottomRightDiagonal.size === 1 && !topLeftBottomRightDiagonal.has(null)) {
     return true;
   }
 
   for (let i = 2; i < 8; i = i + 2) {
-    topRightBottomLeft.add(board[i]);
+    topRightBottomLeftDiagonal.add(board[i]);
   }
 
-  if (topRightBottomLeft.size === 1 && !topRightBottomLeft.has(null)) {
+  if (topRightBottomLeftDiagonal.size === 1 && !topRightBottomLeftDiagonal.has(null)) {
     return true;
   }
 
@@ -59,7 +62,7 @@ const winOnDiagonal = (board) => {
 };
 
 const haveMovesLeft = (board) => {
-  // If there are no nulls there are no moves left
+  // If there are no nulls, there are no moves left
   for (let i = 0; i < board.length; i++) {
     if (board[i] === null) {
       return true;
@@ -70,7 +73,18 @@ const haveMovesLeft = (board) => {
 };
 
 const isGameOver = (board) => {
-  if (winOnRow(board) || winOnColumn(board) || winOnDiagonal(board) || !(haveMovesLeft(board)) ) {
+  // If (winOnRow(board) || winOnColumn(board) || winOnDiagonal(board) || !(haveMovesLeft(board)) ) {
+  if(winOnRow(board)) {
+    console.log('Win on row');
+    return true;
+  } else if (winOnColumn(board)) {
+    console.log('Win on column')
+    return true;
+  } else if (winOnDiagonal(board)) {
+    console.log('Win on diagonal')
+    return true;
+  } else if (!(haveMovesLeft(board))) {
+    console.log('Game over bc no more moves')
     return true;
   } else {
     return false

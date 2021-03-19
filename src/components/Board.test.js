@@ -5,21 +5,26 @@ import userEvent from '@testing-library/user-event'
 
 test('<Board /> renders without crashing', () => {
   const BOARD_DIMENSION = 4;
-  render(<Board boardDimension={BOARD_DIMENSION}/>);
+  const board = new Array(BOARD_DIMENSION  * BOARD_DIMENSION).fill(null);
+
+  render(<Board board={board} boardDimension={BOARD_DIMENSION}/>);
 });
 
 test('it renders an N x N grid of squares, where N is the dimension of the board', () => {
   const BOARD_DIMENSION = 3;
-  render(<Board boardDimension={BOARD_DIMENSION}/>);
+  const board = new Array(BOARD_DIMENSION  * BOARD_DIMENSION).fill(null);
+
+  render(<Board board={board} boardDimension={BOARD_DIMENSION}/>);
+
   // expect(screen.getByRole('button')).toBeInTheDocument();
   expect(Math.sqrt(screen.getAllByRole('button').length)).toBe(BOARD_DIMENSION);
 });
 
-test('it initially displays N x N null squares, where N is the dimension of the board', () => {
+test('it initially displays N x N `null` squares, where N is the dimension of the board', () => {
   const BOARD_DIMENSION = 3;
-  render(<Board boardDimension={BOARD_DIMENSION}/>);
+  const board = new Array(BOARD_DIMENSION  * BOARD_DIMENSION).fill(null);
 
-  // console.log(screen.getAllByRole('button'));
+  render(<Board board={board} boardDimension={BOARD_DIMENSION}/>);
 
   (screen.getAllByRole('button')).forEach( element => {
     // console.log(element.textContent);
@@ -45,7 +50,13 @@ test('the current player switches when a square on the board is clicked', () => 
     currentPlayer = updateTurn(player);
   };
 
-  render(<Board boardDimension={BOARD_DIMENSION} handleTurn={() => setPlayer(currentPlayer)} currentPlayer={currentPlayer}/>);
+  const board = new Array(BOARD_DIMENSION  * BOARD_DIMENSION).fill(null);
+
+  const mockFunc = jest.fn();
+
+  render(<Board board={board} boardDimension={BOARD_DIMENSION} setBoard={mockFunc} handleTurn={() => setPlayer(currentPlayer)} currentPlayer={currentPlayer}/>);
+
+  // render(<Board boardDimension={BOARD_DIMENSION} handleTurn={() => setPlayer(currentPlayer)} currentPlayer={currentPlayer}/>);
 
   const squaresArray = screen.getAllByRole('button');
   const randomSquare = squaresArray[Math.floor(Math.random() * (squaresArray.length - 0) + 0)];
