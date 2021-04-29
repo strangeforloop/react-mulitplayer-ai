@@ -1,9 +1,10 @@
-import { Button, Input, ThemeProvider, Typography } from '@material-ui/core';
+import { Button, TextField, ThemeProvider, Typography } from '@material-ui/core';
 import { useState } from 'react';
 import theme from '../utils/theme';
 
 const StartScreen = ({setNewInstance, setDimension}) => {
   const [disabled, setDisabled] = useState(true);
+  const [isValidInput, setIsValidInput] = useState(true);
 
   const isValidDimension = (userInput) => {
     if (parseInt(userInput, 10) < 3 || parseInt(userInput, 10) > 4) {
@@ -17,18 +18,25 @@ const StartScreen = ({setNewInstance, setDimension}) => {
     <ThemeProvider theme={theme}>
       <div>
         <Typography variant="h1">Tic Tac Toe</Typography>
-        <Input
+        <TextField
           onInput={(e) => {
             if (isValidDimension(e.target.value)) {
+              setIsValidInput(true);
               setDisabled(false);
               const value = parseInt(e.target.value, 10);
               setDimension(value);
             } else {
-              console.log('Please enter either a 3 dimensional board or a 4 dimensional board.');
+              setIsValidInput(false);
+              setDisabled(true);
             }
           }}
-          placeholder="Enter board dimensions">
-        </Input>
+          placeholder="Enter board dimensions"
+          error={!isValidInput}
+          helperText="Please enter a dimension of either 3 or 4."
+          onKeyDown={ event => {
+            if (event.key === 'Enter') setNewInstance(false)
+          }}
+          />
         <br></br>
         <Button disabled={disabled} onClick={() => setNewInstance(false)} color="primary">Play Game</Button>
       </div>

@@ -1,13 +1,11 @@
-import { getBoardDimension } from '../App';
-
 const get1DpositionFrom2Dmatrix = (board, rowIndex, columnIndex) => {
     return (rowIndex * Math.sqrt(board.length)) + columnIndex;
 };
 
 const winOnRow = (board) => {
-  for (let i = 0; i < getBoardDimension(); i++) {
+  for (let i = 0; i < Math.sqrt(board.length); i++) {
     const set = new Set();
-    for (let j = 0; j < getBoardDimension(); j++) {
+    for (let j = 0; j < Math.sqrt(board.length); j++) {
       const position = get1DpositionFrom2Dmatrix(board, i, j);
       set.add(board[position]);
     }
@@ -21,9 +19,9 @@ const winOnRow = (board) => {
 };
 
 const winOnColumn = (board) => {
-  for (let i = 0; i < getBoardDimension(); i++) {
+  for (let i = 0; i < Math.sqrt(board.length); i++) {
     const set = new Set();
-    for (let j = 0; j < getBoardDimension(); j++) {
+    for (let j = 0; j < Math.sqrt(board.length); j++) {
       const position = get1DpositionFrom2Dmatrix(board, j, i);
       set.add(board[position]);
     }

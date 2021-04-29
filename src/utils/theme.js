@@ -1,5 +1,5 @@
 import { createMuiTheme } from "@material-ui/core";
-import { deepPurple, amber, white } from "@material-ui/core/colors";
+import { deepPurple, amber } from "@material-ui/core/colors";
 
 const theme = createMuiTheme({
   palette: {
@@ -22,6 +22,15 @@ theme.props = {
     disableElevation: true,
     variant: "contained"
   }
-}
+};
+
+theme.overrides = {
+  MuiButton: {
+    disabled: {
+      backgroundColor: amber[500],
+      textColor: deepPurple[500]
+    }
+  }
+};
 
 export default theme;

@@ -3,15 +3,9 @@ import { useEffect, useState } from 'react';
 import { Board } from './components/Board';
 import { GameHeader } from './components/GameHeader';
 import withSplashScreen from './components/withSplashScreen';
-import {Button, ThemeProvider } from '@material-ui/core';
+import { Button, ThemeProvider } from '@material-ui/core';
 
 import theme from './utils/theme';
-
-const BOARD_DIMENSION = 3;
-
-const getBoardDimension = () => {
-  return BOARD_DIMENSION;
-};
 
 const App = ({ dimension }) => {
   // use dimension rather than the constant for it
@@ -19,6 +13,7 @@ const App = ({ dimension }) => {
   const [board, setBoard] = useState(initialBoardState);
   const [currentPlayer, setCurrentPlayer] = useState('playerOne');
   const [isGameOver, setIsGameOver] = useState(false);
+  const [winningPlayer, setWinningPlayer] = useState('');
 
   const resetGame = () => {
     setBoard(initialBoardState);
@@ -35,8 +30,9 @@ const App = ({ dimension }) => {
     <ThemeProvider theme={theme}>
       <div className="App">
         <div className="App-header">
-          <GameHeader isGameOver={isGameOver} currentPlayer={currentPlayer}/>
+          <GameHeader isGameOver={isGameOver} currentPlayer={currentPlayer} winningPlayer={winningPlayer}/>
           <Button color="primary" onClick={ resetGame }>Restart Game</Button>
+          <Button color="secondary">Go to Start Screen</Button>
           <Board
             board={board}
             setBoard={setBoard}
@@ -44,6 +40,7 @@ const App = ({ dimension }) => {
             handleTurn={setCurrentPlayer}
             currentPlayer={currentPlayer}
             setIsGameOver={setIsGameOver}
+            setWinningPlayer={setWinningPlayer}
           />
         </div>
       </div>
@@ -52,4 +49,3 @@ const App = ({ dimension }) => {
 }
 
 export default withSplashScreen(App);
-export { getBoardDimension };
