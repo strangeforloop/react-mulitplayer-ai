@@ -7,17 +7,17 @@ const StartScreen = ({setNewInstance, setDimension}) => {
   const [isValidInput, setIsValidInput] = useState(true);
 
   const isValidDimension = (userInput) => {
-    if (parseInt(userInput, 10) < 3 || parseInt(userInput, 10) > 4) {
-      return false;
+    if (parseInt(userInput, 10) === 3 || parseInt(userInput, 10) === 4) {
+      return true;
     }
 
-    return true;
+    return false;
   };
 
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Typography variant="h1">Tic Tac Toe</Typography>
+        <Typography variant="h3">Enter Board Dimensions</Typography>
         <TextField
           onInput={(e) => {
             if (isValidDimension(e.target.value)) {
@@ -44,7 +44,7 @@ const StartScreen = ({setNewInstance, setDimension}) => {
   );
 };
 
-const withSplashScreen = (WrappedComponent) => {
+const withDimensionScreen = (WrappedComponent) => {
   return () => {
     const [newInstance, setNewInstance] = useState(true);
     const [dimension, setDimension] = useState(3);
@@ -54,4 +54,4 @@ const withSplashScreen = (WrappedComponent) => {
   };
 };
 
-export default withSplashScreen;
+export default withDimensionScreen;
