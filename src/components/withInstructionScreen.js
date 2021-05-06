@@ -17,7 +17,7 @@ const ChoosePlayerNumberScreen = ({ setNumberOfPlayers, setPlayerNumberWasChosen
         </Button>
       <Button
         variant="contained" onClick={() => {
-          setNumberOfPlayers(1);
+          setNumberOfPlayers(2);
           setPlayerNumberWasChosen(true);
         }}
         color="primary">

@@ -14,7 +14,9 @@ const App = ({ numberOfPlayers, dimension }) => {
   const [currentPlayer, setCurrentPlayer] = useState('playerOne');
   const [isGameOver, setIsGameOver] = useState(false);
   const [winningPlayer, setWinningPlayer] = useState('');
-  const [isComputerTurn, setIsComputerTurn] = useState(false);
+  // const [isComputerTurn, setIsComputerTurn] = useState(false);
+
+  const isComputerTurn = numberOfPlayers === 1 && currentPlayer !== 'playerOne';
 
   useEffect(() => {
     // prompt if they want to play again
@@ -27,14 +29,18 @@ const App = ({ numberOfPlayers, dimension }) => {
     setIsGameOver(false);
   };
 
-  const hasAIPlayer = () => {
-    if (numberOfPlayers === 1) return true;
-    return false;
-  };
-
   useEffect(() => {
+    const hasAIPlayer = () => {
+      if (numberOfPlayers === 1) return true;
+      return false;
+    };
+
     if (hasAIPlayer()) {
-      if (currentPlayer === 'playerTwo') {
+      // if (currentPlayer === 'playerTwo') {    // ??? current player is the AI player
+      if (isComputerTurn) {
+        // calculate best computer move
+        // miniMax()
+
         // make computer move
         // disable player one from clicking the screen and delay
         // them for a short period of time
@@ -42,6 +48,24 @@ const App = ({ numberOfPlayers, dimension }) => {
       }
     }
   }, [currentPlayer]);
+
+  const miniMax = (board, node, depth, maximizingPlayer) => {
+    if (depth === 0 || node === null) {
+      // return the heuristic value of node
+    }
+
+    if (maximizingPlayer) {
+      // value := −∞
+      // for each child of node do
+      //     value := max(value, minimax(child, depth − 1, FALSE))
+      // return value
+    } else { /* minimizing player */
+      // value := +∞
+      //   for each child of node do
+      //       value := min(value, minimax(child, depth − 1, TRUE))
+      //   return value
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -58,6 +82,7 @@ const App = ({ numberOfPlayers, dimension }) => {
             currentPlayer={currentPlayer}
             setIsGameOver={setIsGameOver}
             setWinningPlayer={setWinningPlayer}
+            disabled={isComputerTurn || isGameOver}
           />
         </div>
       </div>

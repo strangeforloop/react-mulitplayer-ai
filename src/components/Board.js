@@ -12,7 +12,7 @@ const updateTurn = (currentPlayer) => {
   return currentPlayer === 'playerOne' ? 'playerTwo' : 'playerOne';
 };
 
-const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, setIsGameOver , setWinningPlayer }) => {
+const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, disabled, setIsGameOver , setWinningPlayer }) => {
   // Assuming a row major orientation:
   // 1D position = (rowIndex * width) + columnIndex
   const get1DpositionFrom2Dmatrix = (rowIndex, columnIndex) => {
@@ -33,6 +33,9 @@ const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, set
     }
   }, [board]);
 
+
+  console.log(disabled);
+
   return (
     <div>
       {Array(boardDimension).fill(null).map((_, rowIndex) => {
@@ -42,6 +45,7 @@ const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, set
               const position = get1DpositionFrom2Dmatrix(rowIndex, columnIndex);
               return (
                 <Square
+                  disabled={disabled}
                   key={columnIndex}
                   move={board[position]}
                   onClick={ () => {

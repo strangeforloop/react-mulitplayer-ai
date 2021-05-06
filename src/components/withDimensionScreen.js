@@ -45,12 +45,12 @@ const StartScreen = ({setNewInstance, setDimension}) => {
 };
 
 const withDimensionScreen = (WrappedComponent) => {
-  return () => {
+  return ({ numberOfPlayers }) => {
     const [newInstance, setNewInstance] = useState(true);
     const [dimension, setDimension] = useState(3);
 
     if (newInstance) return <StartScreen setNewInstance={setNewInstance} setDimension={setDimension}/>;
-    return <WrappedComponent dimension={dimension}/>;
+    return <WrappedComponent numberOfPlayers={numberOfPlayers} dimension={dimension}/>;
   };
 };
 
