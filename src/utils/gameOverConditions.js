@@ -11,11 +11,13 @@ const winOnRow = (board) => {
     }
 
     if (set.size === 1 & !set.has(null)) {
-      return true;
+      const it = set.values();
+      const winner = it.next().value;
+      return winner;
     }
   }
 
-  return false;
+  return undefined;
 };
 
 const winOnColumn = (board) => {
@@ -27,40 +29,53 @@ const winOnColumn = (board) => {
     }
 
     if (set.size === 1 & !set.has(null)) {
-      return true;
+      const it = set.values();
+      const winner = it.next().value;
+      return winner;
     }
   }
 
-  return false;
+  return undefined;
 };
 
 const winOnDiagonal = (board) => {
-  let topLeftBottomRightDiagonal = new Set();
-  let topRightBottomLeftDiagonal = new Set();
+  const topLeftBottomRightDiagonal = new Set();
+  const topRightBottomLeftDiagonal = new Set();
+  let incrementAmount;
 
-  // To Do: Fix math to not hard code numbers
-  // Right now, this only works if the dimension is 3.
-  for (let i = 0; i < 9; i = i + 4) {
+  // -- Check diagonal from top left to bottom right
+  incrementAmount = Math.sqrt(board.length) + 1;
+
+  for (let i = 0; i < board.length; i = i + incrementAmount) {
     topLeftBottomRightDiagonal.add(board[i]);
   }
 
   if (topLeftBottomRightDiagonal.size === 1 && !topLeftBottomRightDiagonal.has(null)) {
-    return true;
+    const it = topLeftBottomRightDiagonal.values();
+    const winner = it.next().value;
+    return winner;
   }
 
-  for (let i = 2; i < 8; i = i + 2) {
+  // -- Check diagonal from top right to bottom left
+  const topRightIndex = Math.sqrt(board.length) - 1;
+  incrementAmount = Math.sqrt(board.length) - 1;
+
+  for (let i = topRightIndex; i < board.length - 1; i = i + incrementAmount) {
     topRightBottomLeftDiagonal.add(board[i]);
   }
 
   if (topRightBottomLeftDiagonal.size === 1 && !topRightBottomLeftDiagonal.has(null)) {
-    return true;
+    const it = topRightBottomLeftDiagonal.values();
+    const winner = it.next().value;
+    return winner;
   }
 
-  return false;
+  // there is no winner
+  return undefined;
 };
 
 const haveMovesLeft = (board) => {
-  // If there are no nulls, there are no moves left
+  // If there are nulls on the board, then there are still moves
   for (let i = 0; i < board.length; i++) {
     if (board[i] === null) {
       return true;
@@ -70,8 +85,22 @@ const haveMovesLeft = (board) => {
   return false;
 };
 
-const isGameOver = (board) => {
-  // If (winOnRow(board) || winOnColumn(board) || winOnDiagonal(board) || !(haveMovesLeft(board)) ) {
+// returns a boolean flag for if the game is over
+// returns the winner
+const gameStatus = (board) => {
+  return {
+    boardFull: !(haveMovesLeft(board)),
+    winner: winOnRow(board) || winOnColumn(board) || winOnDiagonal(board)
+  }
+
+  // const s = gameStatus(board)
+  // const gameOver = s.boardFULL || !!s.winner
+
+  // const {boardFull, winner} = gameStatus(voard)
+  // if (boardFull || winner) => set game over
+
+  // tie if board is full and winner is undefined
+
   if(winOnRow(board)) {
     console.log('Win on row');
     return true;
@@ -85,8 +114,49 @@ const isGameOver = (board) => {
     console.log('Game over bc no more moves')
     return true;
   } else {
-    return false
+    return false;
   }
 };
 
-export { isGameOver };
+export { gameStatus };
+
+/*
+   0 1 2
+0
+1
+2
+ 00, 11, 22
+ 03, 12, 21
+
+ 0 1 2
+ 3 4 5
+ 6 7 8
+
+   0 1 2 3
+0
+1
+2
+3
+ 00, 11, 22, 33
+ 03, 12, 21, 30
+
+  0  1  2  3
+  4  5  6  7
+  8  9  10 11
+  12 13 14 15
+
+
+  --- How to calucate how much to add: (top left to bottom right diagonal)
+    amountToIncrement = Math.sqrt(board.length) + 1
+    3 = Math.sqrt(4) + 1
+    4 = Math.sqrt(9) + 1
+    5 = Math.sqrt(16) + 1
+    6 = Math.sqrt(25) + 1
+
+
+  --- How to calucate how much to add: (top right to bottom left diagonal)
+  const topRightIndex = Math.sqrt(board.length) - 1;
+  const amountToAdd = Math.sqrt(board.length) - 1;
+    2 = Math.sqrt(9) - 1
+    3 = Math.sqrt(16) - 1
+*/

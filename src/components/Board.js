@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import { Square } from './Square';
-import { isGameOver } from '../utils/gameOverConditions';
+import { gameStatus } from '../utils/gameOverConditions';
 
 const playerMoveMapping = {
   'playerOne': 'x',
   'playerTwo': 'o',
 };
 
-
 const updateTurn = (currentPlayer) => {
   return currentPlayer === 'playerOne' ? 'playerTwo' : 'playerOne';
 };
 
-const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, setIsGameOver , setWinningPlayer }) => {
+const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, disabled, setIsGameOver , setWinningPlayer }) => {
   // Assuming a row major orientation:
   // 1D position = (rowIndex * width) + columnIndex
   const get1DpositionFrom2Dmatrix = (rowIndex, columnIndex) => {
@@ -27,21 +26,34 @@ const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, set
     return newBoard;
   };
 
+  const {boardFull, winner} = gameStatus(board);
+
   useEffect(() => {
-    if (isGameOver(board) === true) {
+    if (winner || boardFull) {
       setIsGameOver(true);
     }
-  }, [board]);
+  }, [boardFull, winner]);
+
+
+  console.log({disabled});
 
   return (
-    <div>
+    <div style={{ 'width': 'max-content'}}>
       {Array(boardDimension).fill(null).map((_, rowIndex) => {
         return (
           <div key={rowIndex}>
             {Array(boardDimension).fill(null).map((_, columnIndex) => {
               const position = get1DpositionFrom2Dmatrix(rowIndex, columnIndex);
+
+              const topLeftStyle = (rowIndex === 0 && columnIndex === 0) ? '5px' : '0';
+              const topRightStyle = (rowIndex === 0 && columnIndex === (boardDimension - 1)) ? '5px' : '0';
+              const bottomLeftStyle = (rowIndex === (boardDimension - 1) && columnIndex === 0) ?  '5px' : '0';
+              const bottomRightStyle = (rowIndex === (boardDimension - 1) && columnIndex === (boardDimension - 1)) ? '5px' : '0';
+
               return (
                 <Square
+                  borderRadiusStyle = {{ topLeftStyle, topRightStyle, bottomRightStyle, bottomLeftStyle }}
+                  disabled={disabled}
                   key={columnIndex}
                   move={board[position]}
                   onClick={ () => {
