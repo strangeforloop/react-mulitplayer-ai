@@ -1,7 +1,7 @@
 
 # React Multiplayer AI Game
 This is a dynamic game that allows users to choose whether they want to play a game with either a 3x3 or 4x4 board against a human or an AI player.
-<br>
+<br><br>
 The AI player uses the MiniMax algorithm and backtracking to find the optimal move.
 
 ## In Progress
