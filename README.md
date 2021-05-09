@@ -9,4 +9,4 @@ This is a dynamic game that allows users to choose whether they want to play aga
 (coming soon)
 
 ## Links
-* [Minimax Algorithem](https://en.wikipedia.org/wiki/Minimax)
+* [Minimax Algorithm](https://en.wikipedia.org/wiki/Minimax)
