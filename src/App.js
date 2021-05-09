@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import { Board } from './components/Board';
 import { GameHeader } from './components/GameHeader';
 import withDimensionScreen from './components/withDimensionScreen';
-import { Button, ThemeProvider } from '@material-ui/core';
+import { Grid, Button, ThemeProvider } from '@material-ui/core';
 import withInstructionScreen from './components/withInstructionScreen';
+import { gameStatus } from './utils/gameOverConditions'
+import { spacing } from '@material-ui/system';
 
 import theme from './utils/theme';
 
@@ -30,40 +32,78 @@ const App = ({ numberOfPlayers, dimension }) => {
   };
 
   useEffect(() => {
-    const hasAIPlayer = () => {
-      if (numberOfPlayers === 1) return true;
-      return false;
+    const bestMove = () => {
+      let bestScore = -Infinity;
+      let bestMove;
+
+      let newBoard = [...board];
+
+      for (let i = 0; i < board.length; i++) {
+        if (board[i] === null) {  // if this spot is available, try the rest of the tree
+          let testBoard = [...board];
+          testBoard[i] = 'O';
+          let score = miniMax(testBoard, false);
+          testBoard[i] = '';
+           if (score > bestScore) {
+            bestScore = score;
+            bestMove = i;
+          }
+        }
+      }
+
+      newBoard[bestMove] = 'O'
+      setBoard(newBoard);
+      setCurrentPlayer('playerOne');
     };
 
-    if (hasAIPlayer()) {
-      // if (currentPlayer === 'playerTwo') {    // ??? current player is the AI player
-      if (isComputerTurn) {
-        // calculate best computer move
-        // miniMax()
+    if (isComputerTurn) {
+      // Computer player is "thinking"
+      setTimeout(() => {
+        // pick the optimal move: score = miniMax(board, 0, true);
+        // place the optimal move on the newBoard
+        // setBoard(newBoard)
+        bestMove();
+      }, 1500);
+    }
+  }, [isComputerTurn]);
 
-        // make computer move
-        // disable player one from clicking the screen and delay
-        // them for a short period of time
-        // change current player to say AI player instead of player two
+  const miniMax = (testBoard, maximizingPlayer) => {
+    const scoreMap = {
+      "X": 1,
+      "O": -1,
+      "Tie": 0
+    };
+
+    const {winner} = gameStatus(testBoard)
+    if (winner) {
+      // someone won, so
+      // get winner from checkGameOver
+      // and return the key associated with the winner in the scoreMap
+      return scoreMap[winner];
+    }
+
+    if (maximizingPlayer) { // goal: maximize score
+      let bestScore = -Infinity;
+      for (let i = 0; i < testBoard.length; i++) {
+        if (testBoard[i] === null) {   // empty
+          testBoard[i] = 'O';
+          let score = miniMax(testBoard, false);
+          testBoard[i] = '';
+          bestScore = Math.max(bestScore, score);
+        }
       }
-    }
-  }, [currentPlayer]);
-
-  const miniMax = (board, node, depth, maximizingPlayer) => {
-    if (depth === 0 || node === null) {
-      // return the heuristic value of node
-    }
-
-    if (maximizingPlayer) {
-      // value := −∞
-      // for each child of node do
-      //     value := max(value, minimax(child, depth − 1, FALSE))
-      // return value
-    } else { /* minimizing player */
-      // value := +∞
-      //   for each child of node do
-      //       value := min(value, minimax(child, depth − 1, TRUE))
-      //   return value
+      return bestScore;
+    } else {                // goal: minimize score
+      let bestScore = Infinity;
+      for (let i = 0; i < testBoard.length; i++) {
+        if (testBoard[i] === null) {   // empty
+          testBoard[i] = 'X';
+          let score = miniMax(testBoard, true);
+          testBoard[i] = '';
+          bestScore = Math.min(bestScore, score);
+        }
+      }
+      return bestScore;
     }
   }
 
@@ -72,8 +112,10 @@ const App = ({ numberOfPlayers, dimension }) => {
       <div className="App">
         <div className="App-header">
           <GameHeader isGameOver={isGameOver} currentPlayer={currentPlayer} winningPlayer={winningPlayer} dimension={dimension}/>
-          <Button color="primary" onClick={ resetGame }>Restart Game</Button>
-          <Button color="secondary" onClick={ ()=> { window.location.reload() }}>Go to Start Screen</Button>
+          <Grid spacing={1} style={{ 'marginBottom': '1rem'}}>
+            <Button color="primary" onClick={ resetGame }>Restart Game</Button>
+            <Button color="secondary" onClick={ ()=> { window.location.reload() }}>Go to Start Screen</Button>
+          </Grid>
           <Board
             board={board}
             setBoard={setBoard}

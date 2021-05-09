@@ -11,7 +11,7 @@ const GameHeader = ({ isGameOver, currentPlayer, winningPlayer, dimension }) => 
 
   return (
     <div>
-      <Typography variant="h2">{gameTitle}</Typography>
+      <Typography variant="h3">{gameTitle}</Typography>
       {
         isGameOver ? <Typography>{`Player ${winningPlayer} Won!`}</Typography> :
           <Typography>

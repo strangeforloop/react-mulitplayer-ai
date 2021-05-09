@@ -1,4 +1,4 @@
-import { Button, TextField, ThemeProvider, Typography } from '@material-ui/core';
+import { Box, Button, TextField, ThemeProvider, Typography } from '@material-ui/core';
 import { useState } from 'react';
 import theme from '../utils/theme';
 
@@ -16,29 +16,33 @@ const StartScreen = ({setNewInstance, setDimension}) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div>
-        <Typography variant="h3">Enter Board Dimensions</Typography>
-        <TextField
-          onInput={(e) => {
-            if (isValidDimension(e.target.value)) {
-              setIsValidInput(true);
-              setDisabled(false);
-              const value = parseInt(e.target.value, 10);
-              setDimension(value);
-            } else {
-              setIsValidInput(false);
-              setDisabled(true);
-            }
-          }}
-          placeholder="Enter board dimensions"
-          error={!isValidInput}
-          helperText="Please enter a dimension of either 3 or 4."
-          onKeyDown={ event => {
-            if (event.key === 'Enter') setNewInstance(false)
-          }}
+      <div style={{ 'maxWidth': '900px', 'margin': '3rem auto' }}>
+        <Typography variant="h4" style={{ 'marginBottom': '1rem'}}>Configure your board!</Typography>
+        <Typography variant="h5" color="primary">Enter board dimensions:</Typography>
+        <Box style={{'marginTop': '1rem'}}>
+          <TextField
+            onInput={(e) => {
+              if (isValidDimension(e.target.value)) {
+                setIsValidInput(true);
+                setDisabled(false);
+                const value = parseInt(e.target.value, 10);
+                setDimension(value);
+              } else {
+                setIsValidInput(false);
+                setDisabled(true);
+              }
+            }}
+            placeholder="Enter board dimensions"
+            error={!isValidInput}
+            helperText="Please enter a dimension of either 3 or 4."
+            onKeyDown={ event => {
+              if (event.key === 'Enter') setNewInstance(false)
+            }}
+            style={{ 'marginBottom': '1rem' }}
           />
-        <br></br>
-        <Button disabled={disabled} onClick={() => setNewInstance(false)} color="primary">Play Game</Button>
+          <br></br>
+          <Button disabled={disabled} onClick={() => setNewInstance(false)} color="primary">Play Game</Button>
+        </Box>
       </div>
     </ThemeProvider>
   );
