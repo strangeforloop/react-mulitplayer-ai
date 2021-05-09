@@ -11,5 +11,9 @@ The AI player uses the MiniMax algorithm and backtracking to find the optimal mo
 ## What I Learned
 (coming soon)
 
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
+
 ## Links
 * [Minimax Algorithm](https://en.wikipedia.org/wiki/Minimax)
