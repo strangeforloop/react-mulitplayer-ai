@@ -13,10 +13,11 @@ const GameHeader = ({ isGameOver, currentPlayer, winningPlayer, dimension }) => 
     <div>
       <Typography variant="h3">{gameTitle}</Typography>
       {
-        isGameOver ? <Typography>{`Player ${winningPlayer} Won!`}</Typography> :
-          <Typography>
-            {formatPlayer(currentPlayer)}'s Turn
-          </Typography>
+        (() => {
+          if (!isGameOver) return <Typography>{formatPlayer(currentPlayer)}'s Turn</Typography>;
+          if (winningPlayer === undefined) return <Typography>There is a tie!</Typography>
+          return <Typography>{`Player ${winningPlayer} Won!`}</Typography>;
+        })()
       }
     </div>
   );

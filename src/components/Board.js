@@ -31,7 +31,9 @@ const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, dis
   useEffect(() => {
     if (winner || boardFull) {
       setIsGameOver(true);
+      setWinningPlayer(winner);
     }
+
   }, [boardFull, winner]);
 
 
@@ -57,7 +59,7 @@ const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, dis
                   key={columnIndex}
                   move={board[position]}
                   onClick={ () => {
-                      setWinningPlayer(currentPlayer);
+                      // setWinningPlayer(currentPlayer);
                     // if (board[position] === null) {
                       handleTurn(updateTurn(currentPlayer))
                       // we clicked index the spot at [row][column]:

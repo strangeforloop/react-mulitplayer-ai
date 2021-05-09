@@ -15,15 +15,9 @@ const App = ({ numberOfPlayers, dimension }) => {
   const [board, setBoard] = useState(initialBoardState);
   const [currentPlayer, setCurrentPlayer] = useState('playerOne');
   const [isGameOver, setIsGameOver] = useState(false);
-  const [winningPlayer, setWinningPlayer] = useState('');
-  // const [isComputerTurn, setIsComputerTurn] = useState(false);
+  const [winningPlayer, setWinningPlayer] = useState(undefined);
 
   const isComputerTurn = numberOfPlayers === 1 && currentPlayer !== 'playerOne';
-
-  useEffect(() => {
-    // prompt if they want to play again
-    // the user shouldn't be able to make more moves clicks
-  }, [isGameOver]);
 
   const resetGame = () => {
     setBoard(initialBoardState);
@@ -56,7 +50,7 @@ const App = ({ numberOfPlayers, dimension }) => {
       setCurrentPlayer('playerOne');
     };
 
-    if (isComputerTurn) {
+    if (isComputerTurn) {  // && (winningPlayer === undefined)
       // Computer player is "thinking"
       setTimeout(() => {
         // pick the optimal move: score = miniMax(board, 0, true);
@@ -74,7 +68,8 @@ const App = ({ numberOfPlayers, dimension }) => {
       "Tie": 0
     };
 
-    const {winner} = gameStatus(testBoard)
+    const {winner} = gameStatus(testBoard);
+
     if (winner) {
       // someone won, so
       // get winner from checkGameOver
