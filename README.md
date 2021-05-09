@@ -6,6 +6,7 @@ The AI player uses the MiniMax algorithm and backtracking to find the optimal mo
 
 ## In Progress
 * The logic for the AI player is still in progress.
+* Complete the testing suites.
 
 ## What I Learned
 (coming soon)
