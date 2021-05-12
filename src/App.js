@@ -23,10 +23,19 @@ const App = ({ numberOfPlayers, dimension }) => {
     setBoard(initialBoardState);
     setCurrentPlayer('playerOne');
     setIsGameOver(false);
+    setWinningPlayer(undefined);
   };
 
   useEffect(() => {
     const bestMove = () => {
+      const {winner} = gameStatus(board);
+
+      if (winner) {
+        setIsGameOver(true);
+        setWinningPlayer(winner);
+        return;
+      }
+
       let bestScore = -Infinity;
       let bestMove;
 
@@ -50,7 +59,7 @@ const App = ({ numberOfPlayers, dimension }) => {
       setCurrentPlayer('playerOne');
     };
 
-    if (isComputerTurn) {  // && (winningPlayer === undefined)
+    if (isComputerTurn && (winningPlayer === undefined)) {
       // Computer player is "thinking"
       setTimeout(() => {
         // pick the optimal move: score = miniMax(board, 0, true);
@@ -63,17 +72,28 @@ const App = ({ numberOfPlayers, dimension }) => {
 
   const miniMax = (testBoard, maximizingPlayer) => {
     const scoreMap = {
-      "X": 1,
-      "O": -1,
+      "X": -1,
+      "O": 1,
       "Tie": 0
     };
 
-    const {winner} = gameStatus(testBoard);
+    const {boardFull, winner} = gameStatus(testBoard);
+
+    // // I need to implement a way to see if there was a tie
+    // if (winner) {
+    //   // someone won, so
+    //   // get winner from checkGameOver
+    //   // and return the key associated with the winner in the scoreMap
+    //   return scoreMap[winner];
+    // }
+
+     // I need to implement a way to see if there was a tie
+     // if the board is full, but there is no winner,
+     if (boardFull && (winner === undefined)) {
+      return scoreMap["Tie"];
+    }
 
     if (winner) {
-      // someone won, so
-      // get winner from checkGameOver
-      // and return the key associated with the winner in the scoreMap
       return scoreMap[winner];
     }
 

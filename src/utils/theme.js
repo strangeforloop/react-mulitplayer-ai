@@ -11,6 +11,10 @@ const theme = createMuiTheme({
       main: deepPurple[500],
       contrastText: amber[900]
     },
+    info: {
+      main: '#7A9E7E',
+      contrastText: '#7A9E7E',
+    },
     text: {
       disabled: amber[500]
     }
@@ -29,6 +33,14 @@ theme.overrides = {
     disabled: {
       backgroundColor: amber[500],
       textColor: deepPurple[500]
+    }
+  },
+  MuiInputLabel: {
+    root: {
+      color: "orange",
+      "&$focused": { // increase the specificity for the pseudo class
+        color: "blue"
+      }
     }
   }
 };

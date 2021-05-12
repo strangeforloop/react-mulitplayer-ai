@@ -1,5 +1,6 @@
 import { Box, Button, TextField, ThemeProvider, Typography } from '@material-ui/core';
 import { useState } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import theme from '../utils/theme';
 
 const StartScreen = ({setNewInstance, setDimension}) => {
@@ -12,6 +13,12 @@ const StartScreen = ({setNewInstance, setDimension}) => {
     }
 
     return false;
+  };
+
+  const classes = {
+    cssLabel: {
+      color: 'green'
+    }
   };
 
   return (
@@ -33,8 +40,16 @@ const StartScreen = ({setNewInstance, setDimension}) => {
               }
             }}
             placeholder="Enter board dimensions"
-            error={!isValidInput}
             helperText="Please enter a dimension of either 3 or 4."
+            InputLabelProps={{
+              classes: {
+                root: classes.cssLabel
+              }
+            }}
+            InputProps={{
+              classes: {}
+            }}
+            error={!isValidInput}
             onKeyDown={ event => {
               if (event.key === 'Enter') setNewInstance(false)
             }}

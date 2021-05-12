@@ -40,7 +40,7 @@ const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, dis
   console.log({disabled});
 
   return (
-    <div style={{ 'width': 'max-content'}}>
+    <div style={{ 'width': 'max-content' }}>
       {Array(boardDimension).fill(null).map((_, rowIndex) => {
         return (
           <div key={rowIndex}>

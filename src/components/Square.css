@@ -1,0 +1,33 @@
+.box {
+  position: relative;
+  width: 64px;
+  /* desired width */
+  margin: 3px;
+
+}
+
+.box:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+  /* initial ratio of 1:1*/
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  line-height:100%;
+  height:100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .MuiButtonBase-root .content:hover { */
+.content.MuiButton-contained:hover {
+  background-color: #bfbfbf !important;
+}

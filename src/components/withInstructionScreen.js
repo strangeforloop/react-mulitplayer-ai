@@ -26,7 +26,7 @@ const ChoosePlayerNumberScreen = ({ setNumberOfPlayers, setPlayerNumberWasChosen
             </Button>
             <Box px={3} paddingTop={2}>
               <Typography variant="body1" style={{'marginBottom': '1rem' }}>1 Player mode pits you against an AI player that uses the Minimax algorithm, a game theory strategy, to choose the best move to make.</Typography>
-              <Link href="https://en.wikipedia.org/wiki/Minimax" target="_blank" rel="noopener">Click to read more about the AI logic!</Link>
+              <Link href="https://en.wikipedia.org/wiki/Minimax" color="info" target="_blank" rel="noopener">Click to read more about the AI logic!</Link>
             </Box>
           {/* </Box> */}
           </Grid>
