@@ -35,9 +35,6 @@ const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, dis
 
   }, [isTie, winner]);
 
-
-  console.log(disabled);
-
   return (
     <div style={{ 'width': 'max-content' }}>
       {Array(boardDimension).fill(null).map((_, rowIndex) => {
