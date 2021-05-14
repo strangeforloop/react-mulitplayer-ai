@@ -11,7 +11,7 @@ const theme = createMuiTheme({
       main: deepPurple[500],
       contrastText: amber[900]
     },
-    info: {
+    textSecondary: {
       main: '#7A9E7E',
       contrastText: '#7A9E7E',
     },

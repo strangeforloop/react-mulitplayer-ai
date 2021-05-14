@@ -70,7 +70,7 @@ const winOnDiagonal = (board) => {
     return winner;
   }
 
-  // there is no winner
+  // There is no winner
   return undefined;
 };
 
@@ -85,23 +85,13 @@ const haveMovesLeft = (board) => {
   return false;
 };
 
-// returns a boolean flag for if the game is over
-// returns the winner
 const gameStatus = (board) => {
   const winner = winOnRow(board) || winOnColumn(board) || winOnDiagonal(board);
 
   return {
     isTie: !(haveMovesLeft(board)) && (winner === undefined),
     winner: winner
-  }
-
-  // const s = gameStatus(board)
-  // const gameOver = s.boardFULL || !!s.winner
-
-  // const {boardFull, winner} = gameStatus(voard)
-  // if (boardFull || winner) => set game over
-
-  // tie if board is full and winner is undefined
+  };
 };
 
 export { gameStatus };

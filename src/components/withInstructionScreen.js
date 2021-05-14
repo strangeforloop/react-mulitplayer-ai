@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Instructions } from './Instructions';
 import { Box, Button, Grid, Link, ThemeProvider, Typography } from '@material-ui/core';
-import { spacing } from '@material-ui/system';
 import theme from '../utils/theme';
 import '../App.css';
 
@@ -11,9 +9,7 @@ const ChoosePlayerNumberScreen = ({ setNumberOfPlayers, setPlayerNumberWasChosen
       <div style={{ 'margin': '3rem'}}>
         <Typography variant="h4" style={{ 'marginBottom': '1rem'}}>Let's play Tic Tac Toe or Connect Four</Typography>
         <Typography variant="h5" color="primary">First, choose the number of players:</Typography>
-        {/* <Box display='flex' flexWrap="wrap"> */}
-        <Grid spacing={4} container style={{ 'maxWidth': '900px', 'margin': 'auto' }}>
-          {/* <Box flex='1 1 0' bgcolor="gray"> */}
+        <Grid container style={{ 'maxWidth': '900px', 'margin': 'auto' }}>
           <Grid item sm={6} style={{ 'width' : '100%', 'marginTop': '1rem' }}>
             <Button
               style={{ 'width': '50%'}}
@@ -26,11 +22,9 @@ const ChoosePlayerNumberScreen = ({ setNumberOfPlayers, setPlayerNumberWasChosen
             </Button>
             <Box px={3} paddingTop={2}>
               <Typography variant="body1" style={{'marginBottom': '1rem' }}>1 Player mode pits you against an AI player that uses the Minimax algorithm, a game theory strategy, to choose the best move to make.</Typography>
-              <Link href="https://en.wikipedia.org/wiki/Minimax" color="info" target="_blank" rel="noopener">Click to read more about the AI logic!</Link>
+              <Link href="https://en.wikipedia.org/wiki/Minimax" color="textSecondary" target="_blank" rel="noopener">Click to read more about the AI logic!</Link>
             </Box>
-          {/* </Box> */}
           </Grid>
-          {/* <Box flex='1 1 0' bgcolor="gray"> */}
           <Grid item sm={6} style={{ 'width' : '100%', 'marginTop': '1rem'}}>
             <Button
               style={{ 'width': '50%'}}
@@ -44,11 +38,8 @@ const ChoosePlayerNumberScreen = ({ setNumberOfPlayers, setPlayerNumberWasChosen
             <Box px={3} paddingTop={2}>
               <Typography variant="body1">2 Player mode pits you against a real person.</Typography>
             </Box>
-          {/* </Box> */}
           </Grid>
-        {/* </Box> */}
         </Grid>
-        {/* <Instructions /> */}
       </div>
     </ThemeProvider>
   );

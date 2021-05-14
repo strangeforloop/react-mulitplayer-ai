@@ -60,11 +60,8 @@ const App = ({ numberOfPlayers, dimension }) => {
     };
 
     if (isComputerTurn && (winningPlayer === undefined)) {
-      // Computer player is "thinking"
+      // Simulate that computer player is "thinking"
       setTimeout(() => {
-        // pick the optimal move: score = miniMax(board, 0, true);
-        // place the optimal move on the newBoard
-        // setBoard(newBoard)
         bestMove();
       }, 1500);
     }
@@ -79,8 +76,6 @@ const App = ({ numberOfPlayers, dimension }) => {
 
     const {isTie, winner} = gameStatus(testBoard);
 
-     // I need to implement a way to see if there was a tie
-     // if the board is full, but there is no winner,
      if (isTie) {
       return scoreMap["Tie"];
     }
@@ -92,27 +87,25 @@ const App = ({ numberOfPlayers, dimension }) => {
     let bestScore;
 
     if (isMaximizingPlayer) { // goal: maximize score
-      // let bestScore = -Infinity;
       bestScore = -Infinity;
 
       for (let i = 0; i < testBoard.length; i++) {
-        if (testBoard[i] === null) {   // empty
-          testBoard[i] = 'o';
-          let score = miniMax(testBoard, false);
-          testBoard[i] = '';
+        if (testBoard[i] === null) {   // no move here
+          const aiGameBoard = [...testBoard];
+          aiGameBoard[i] = 'o';
+          let score = miniMax(aiGameBoard, false);
           bestScore = Math.max(bestScore, score);
         }
       }
       return bestScore;
-    } else {                // goal: minimize score
-      // let bestScore = Infinity;
+    } else {  // goal: minimize score
       bestScore = Infinity;
 
       for (let i = 0; i < testBoard.length; i++) {
-        if (testBoard[i] === null) {   // empty
-          testBoard[i] = 'x';
-          let score = miniMax(testBoard, true);
-          testBoard[i] = '';
+        if (testBoard[i] === null) {   // no move here
+          const aiGameBoard = [...testBoard];
+          aiGameBoard[i] = 'x';
+          let score = miniMax(aiGameBoard, true);
           bestScore = Math.min(bestScore, score);
         }
       }
@@ -125,7 +118,7 @@ const App = ({ numberOfPlayers, dimension }) => {
       <div className="App">
         <div className="App-header">
           <GameHeader isGameOver={isGameOver} currentPlayer={currentPlayer} winningPlayer={winningPlayer} dimension={dimension}/>
-          <Grid spacing={1} style={{ 'marginBottom': '1rem'}}>
+          <Grid style={{ 'marginBottom': '1rem'}}>
             <Button color="primary" onClick={ resetGame }>Restart Game</Button>
             <Button color="secondary" onClick={ ()=> { window.location.reload() }}>Go to Start Screen</Button>
           </Grid>

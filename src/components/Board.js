@@ -11,9 +11,8 @@ const updateTurn = (currentPlayer) => {
   return currentPlayer === 'playerOne' ? 'playerTwo' : 'playerOne';
 };
 
-const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, disabled, setIsGameOver , setWinningPlayer }) => {
-  // Assuming a row major orientation:
-  // 1D position = (rowIndex * width) + columnIndex
+const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, disabled, setIsGameOver, setWinningPlayer }) => {
+  // Assuming a row major orientation: 1D position = (rowIndex * width) + columnIndex
   const get1DpositionFrom2Dmatrix = (rowIndex, columnIndex) => {
     const position = (rowIndex * boardDimension) + columnIndex;
     return position;
@@ -26,7 +25,7 @@ const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, dis
     return newBoard;
   };
 
-  const {isTie, winner} = gameStatus(board);
+  const { isTie, winner } = gameStatus(board);
 
   useEffect(() => {
     if (winner || isTie) {
@@ -49,32 +48,27 @@ const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, dis
 
               const topLeftStyle = (rowIndex === 0 && columnIndex === 0) ? '5px' : '0';
               const topRightStyle = (rowIndex === 0 && columnIndex === (boardDimension - 1)) ? '5px' : '0';
-              const bottomLeftStyle = (rowIndex === (boardDimension - 1) && columnIndex === 0) ?  '5px' : '0';
+              const bottomLeftStyle = (rowIndex === (boardDimension - 1) && columnIndex === 0) ? '5px' : '0';
               const bottomRightStyle = (rowIndex === (boardDimension - 1) && columnIndex === (boardDimension - 1)) ? '5px' : '0';
 
               return (
                 <Square
-                  borderRadiusStyle = {{ topLeftStyle, topRightStyle, bottomRightStyle, bottomLeftStyle }}
+                  borderRadiusStyle={{ topLeftStyle, topRightStyle, bottomRightStyle, bottomLeftStyle }}
                   disabled={disabled}
                   key={columnIndex}
                   move={board[position]}
-                  onClick={ () => {
-                      // setWinningPlayer(currentPlayer);
-                    // if (board[position] === null) {
-                      handleTurn(updateTurn(currentPlayer))
-                      // we clicked index the spot at [row][column]:
-                      // we want this to correspond to:
-                      const newBoard = updateBoard(board, rowIndex, columnIndex, playerMoveMapping[`${currentPlayer}`]);
-                      setBoard(newBoard);
-                    // }
+                  onClick={() => {
+                    handleTurn(updateTurn(currentPlayer))
+                    const newBoard = updateBoard(board, rowIndex, columnIndex, playerMoveMapping[`${currentPlayer}`]);
+                    setBoard(newBoard);
                   }}
-                  // disabled={board[position] !== null}
-                />)
+                />
+              )
             })}
           </div>
         );
       })}
-   </div>
+    </div>
   );
 };
 
