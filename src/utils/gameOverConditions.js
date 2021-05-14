@@ -88,9 +88,11 @@ const haveMovesLeft = (board) => {
 // returns a boolean flag for if the game is over
 // returns the winner
 const gameStatus = (board) => {
+  const winner = winOnRow(board) || winOnColumn(board) || winOnDiagonal(board);
+
   return {
-    boardFull: !(haveMovesLeft(board)),
-    winner: winOnRow(board) || winOnColumn(board) || winOnDiagonal(board)
+    isTie: !(haveMovesLeft(board)) && (winner === undefined),
+    winner: winner
   }
 
   // const s = gameStatus(board)
@@ -100,63 +102,6 @@ const gameStatus = (board) => {
   // if (boardFull || winner) => set game over
 
   // tie if board is full and winner is undefined
-
-  if(winOnRow(board)) {
-    console.log('Win on row');
-    return true;
-  } else if (winOnColumn(board)) {
-    console.log('Win on column')
-    return true;
-  } else if (winOnDiagonal(board)) {
-    console.log('Win on diagonal')
-    return true;
-  } else if (!(haveMovesLeft(board))) {
-    console.log('Game over bc no more moves')
-    return true;
-  } else {
-    return false;
-  }
 };
 
 export { gameStatus };
-
-/*
-   0 1 2
-0
-1
-2
- 00, 11, 22
- 03, 12, 21
-
- 0 1 2
- 3 4 5
- 6 7 8
-
-   0 1 2 3
-0
-1
-2
-3
- 00, 11, 22, 33
- 03, 12, 21, 30
-
-  0  1  2  3
-  4  5  6  7
-  8  9  10 11
-  12 13 14 15
-
-
-  --- How to calucate how much to add: (top left to bottom right diagonal)
-    amountToIncrement = Math.sqrt(board.length) + 1
-    3 = Math.sqrt(4) + 1
-    4 = Math.sqrt(9) + 1
-    5 = Math.sqrt(16) + 1
-    6 = Math.sqrt(25) + 1
-
-
-  --- How to calucate how much to add: (top right to bottom left diagonal)
-  const topRightIndex = Math.sqrt(board.length) - 1;
-  const amountToAdd = Math.sqrt(board.length) - 1;
-    2 = Math.sqrt(9) - 1
-    3 = Math.sqrt(16) - 1
-*/

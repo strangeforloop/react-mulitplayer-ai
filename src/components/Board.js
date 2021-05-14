@@ -26,18 +26,18 @@ const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, dis
     return newBoard;
   };
 
-  const {boardFull, winner} = gameStatus(board);
+  const {isTie, winner} = gameStatus(board);
 
   useEffect(() => {
-    if (winner || boardFull) {
+    if (winner || isTie) {
       setIsGameOver(true);
       setWinningPlayer(winner);
     }
 
-  }, [boardFull, winner]);
+  }, [isTie, winner]);
 
 
-  console.log({disabled});
+  console.log(disabled);
 
   return (
     <div style={{ 'width': 'max-content' }}>

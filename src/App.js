@@ -28,7 +28,7 @@ const App = ({ numberOfPlayers, dimension }) => {
 
   useEffect(() => {
     const bestMove = () => {
-      const {winner} = gameStatus(board);
+      const {isTie, winner} = gameStatus(board);
 
       if (winner) {
         setIsGameOver(true);
@@ -44,7 +44,7 @@ const App = ({ numberOfPlayers, dimension }) => {
       for (let i = 0; i < board.length; i++) {
         if (board[i] === null) {  // if this spot is available, try the rest of the tree
           let testBoard = [...board];
-          testBoard[i] = 'O';
+          testBoard[i] = 'o';
           let score = miniMax(testBoard, false);
           testBoard[i] = '';
            if (score > bestScore) {
@@ -54,7 +54,7 @@ const App = ({ numberOfPlayers, dimension }) => {
         }
       }
 
-      newBoard[bestMove] = 'O'
+      newBoard[bestMove] = 'o'
       setBoard(newBoard);
       setCurrentPlayer('playerOne');
     };
@@ -70,26 +70,18 @@ const App = ({ numberOfPlayers, dimension }) => {
     }
   }, [isComputerTurn]);
 
-  const miniMax = (testBoard, maximizingPlayer) => {
+  const miniMax = (testBoard, isMaximizingPlayer) => {
     const scoreMap = {
-      "X": -1,
-      "O": 1,
+      "o": 1,
+      "x": -1,
       "Tie": 0
     };
 
-    const {boardFull, winner} = gameStatus(testBoard);
-
-    // // I need to implement a way to see if there was a tie
-    // if (winner) {
-    //   // someone won, so
-    //   // get winner from checkGameOver
-    //   // and return the key associated with the winner in the scoreMap
-    //   return scoreMap[winner];
-    // }
+    const {isTie, winner} = gameStatus(testBoard);
 
      // I need to implement a way to see if there was a tie
      // if the board is full, but there is no winner,
-     if (boardFull && (winner === undefined)) {
+     if (isTie) {
       return scoreMap["Tie"];
     }
 
@@ -97,11 +89,15 @@ const App = ({ numberOfPlayers, dimension }) => {
       return scoreMap[winner];
     }
 
-    if (maximizingPlayer) { // goal: maximize score
-      let bestScore = -Infinity;
+    let bestScore;
+
+    if (isMaximizingPlayer) { // goal: maximize score
+      // let bestScore = -Infinity;
+      bestScore = -Infinity;
+
       for (let i = 0; i < testBoard.length; i++) {
         if (testBoard[i] === null) {   // empty
-          testBoard[i] = 'O';
+          testBoard[i] = 'o';
           let score = miniMax(testBoard, false);
           testBoard[i] = '';
           bestScore = Math.max(bestScore, score);
@@ -109,10 +105,12 @@ const App = ({ numberOfPlayers, dimension }) => {
       }
       return bestScore;
     } else {                // goal: minimize score
-      let bestScore = Infinity;
+      // let bestScore = Infinity;
+      bestScore = Infinity;
+
       for (let i = 0; i < testBoard.length; i++) {
         if (testBoard[i] === null) {   // empty
-          testBoard[i] = 'X';
+          testBoard[i] = 'x';
           let score = miniMax(testBoard, true);
           testBoard[i] = '';
           bestScore = Math.min(bestScore, score);
