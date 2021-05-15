@@ -4,8 +4,10 @@ This is a dynamic game that allows users to choose whether they want to play a g
 <br><br>
 The AI player uses the MiniMax algorithm and backtracking to find the optimal move.
 
+# :video_game: Play the Game! :video_game:	
+[Click here to view the application](https://strangeforloop.github.io/react-mulitplayer-ai/)
+
 ## In Progress
-* The logic for the AI player is still in progress.
 * Complete the testing suites.
 
 ## What I Learned
