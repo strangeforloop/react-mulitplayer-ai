@@ -1,5 +1,5 @@
 import { createMuiTheme } from "@material-ui/core";
-import { deepPurple, amber } from "@material-ui/core/colors";
+import { deepPurple, amber, blue } from "@material-ui/core/colors";
 
 const theme = createMuiTheme({
   palette: {
@@ -9,10 +9,10 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: deepPurple[500],
-      contrastText: amber[900]
+      contrastText: amber[600]
     },
     textSecondary: {
-      main: '#7A9E7E',
+      main: blue[400],
       contrastText: '#7A9E7E',
     },
     text: {

@@ -23,7 +23,8 @@ const StartScreen = ({setNewInstance, setDimension}) => {
   return (
     <ThemeProvider theme={theme}>
       <div style={{ 'maxWidth': '900px', 'margin': '3rem auto' }}>
-        <Typography variant="h4" style={{ 'marginBottom': '1rem'}}>Configure your board!</Typography>
+        <Typography variant="h4" style={{ 'marginBottom': '1rem'}}>Let's play Tic Tac Toe or Connect Four</Typography>
+        {/* <Typography variant="h4" style={{ 'marginBottom': '1rem'}}>Configure your board!</Typography> */}
         <Typography variant="h5" color="primary">Enter board dimensions:</Typography>
         <Box style={{'marginTop': '1rem'}}>
           <TextField
@@ -50,7 +51,7 @@ const StartScreen = ({setNewInstance, setDimension}) => {
             }}
             error={!isValidInput}
             onKeyDown={ event => {
-              if (event.key === 'Enter') setNewInstance(false)
+              if ((event.key === 'Enter') && isValidDimension(event.target.value)) setNewInstance(false)
             }}
             style={{ 'marginBottom': '1rem' }}
           />
@@ -63,12 +64,12 @@ const StartScreen = ({setNewInstance, setDimension}) => {
 };
 
 const withDimensionScreen = (WrappedComponent) => {
-  return ({ numberOfPlayers }) => {
+  return () => {
     const [newInstance, setNewInstance] = useState(true);
     const [dimension, setDimension] = useState(3);
 
     if (newInstance) return <StartScreen setNewInstance={setNewInstance} setDimension={setDimension}/>;
-    return <WrappedComponent numberOfPlayers={numberOfPlayers} dimension={dimension}/>;
+    return <WrappedComponent dimension={dimension}/>;
   };
 };
 
