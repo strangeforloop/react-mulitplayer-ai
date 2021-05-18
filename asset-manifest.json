@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/react-mulitplayer-ai/static/css/main.ecdc7d10.chunk.css",
-    "main.js": "/react-mulitplayer-ai/static/js/main.bfedac2f.chunk.js",
-    "main.js.map": "/react-mulitplayer-ai/static/js/main.bfedac2f.chunk.js.map",
+    "main.css": "/react-mulitplayer-ai/static/css/main.a84ba730.chunk.css",
+    "main.js": "/react-mulitplayer-ai/static/js/main.01639a5e.chunk.js",
+    "main.js.map": "/react-mulitplayer-ai/static/js/main.01639a5e.chunk.js.map",
     "runtime-main.js": "/react-mulitplayer-ai/static/js/runtime-main.d411430c.js",
     "runtime-main.js.map": "/react-mulitplayer-ai/static/js/runtime-main.d411430c.js.map",
-    "static/js/2.266520b0.chunk.js": "/react-mulitplayer-ai/static/js/2.266520b0.chunk.js",
-    "static/js/2.266520b0.chunk.js.map": "/react-mulitplayer-ai/static/js/2.266520b0.chunk.js.map",
+    "static/js/2.dcf78f07.chunk.js": "/react-mulitplayer-ai/static/js/2.dcf78f07.chunk.js",
+    "static/js/2.dcf78f07.chunk.js.map": "/react-mulitplayer-ai/static/js/2.dcf78f07.chunk.js.map",
     "index.html": "/react-mulitplayer-ai/index.html",
-    "static/css/main.ecdc7d10.chunk.css.map": "/react-mulitplayer-ai/static/css/main.ecdc7d10.chunk.css.map",
-    "static/js/2.266520b0.chunk.js.LICENSE.txt": "/react-mulitplayer-ai/static/js/2.266520b0.chunk.js.LICENSE.txt"
+    "static/css/main.a84ba730.chunk.css.map": "/react-mulitplayer-ai/static/css/main.a84ba730.chunk.css.map",
+    "static/js/2.dcf78f07.chunk.js.LICENSE.txt": "/react-mulitplayer-ai/static/js/2.dcf78f07.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.d411430c.js",
-    "static/js/2.266520b0.chunk.js",
-    "static/css/main.ecdc7d10.chunk.css",
-    "static/js/main.bfedac2f.chunk.js"
+    "static/js/2.dcf78f07.chunk.js",
+    "static/css/main.a84ba730.chunk.css",
+    "static/js/main.01639a5e.chunk.js"
   ]
 }
