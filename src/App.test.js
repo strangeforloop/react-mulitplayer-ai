@@ -6,11 +6,6 @@ test('<App /> renders without crashing', () => {
   render(<App />);
 });
 
-// test('it initially displays \'Player One\' as the current player', () => {
-//   render(<App />);
-//   expect(screen.getByText(/player one/i)).toBeInTheDocument();
-// });
-
 // test that it has expected children,
 // (aka it renders a <Board /> and a <GameHeader />)
 // but instead

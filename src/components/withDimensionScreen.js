@@ -76,7 +76,7 @@ const withDimensionScreen = (WrappedComponent) => {
 };
 
 StartScreen.propTypes = {
-  setNewInstance: PropTypes.bool,
+  setNewInstance: PropTypes.func,
   setDimension: PropTypes.func
 };
 
