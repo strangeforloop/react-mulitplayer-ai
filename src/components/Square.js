@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import React, { Button } from '@material-ui/core';
 import "./Square.css";
 
 const Square = ({ move, onClick, disabled, borderRadiusStyle }) => {

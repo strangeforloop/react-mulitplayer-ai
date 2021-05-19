@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Button, TextField, ThemeProvider, Typography } from '@material-ui/core';
 import { useState } from 'react';
 import theme from '../utils/theme';
@@ -23,7 +24,7 @@ const StartScreen = ({setNewInstance, setDimension}) => {
   return (
     <ThemeProvider theme={theme}>
       <div style={{ 'maxWidth': '900px', 'margin': '3rem auto' }}>
-        <Typography variant="h4" style={{ 'marginBottom': '1rem'}}>Let's play Tic Tac Toe or Connect Four</Typography>
+        <Typography variant="h4" style={{ 'marginBottom': '1rem'}}>Let&apos;'s play Tic Tac Toe or Connect Four</Typography>
         {/* <Typography variant="h4" style={{ 'marginBottom': '1rem'}}>Configure your board!</Typography> */}
         <Typography variant="h5" color="primary">Enter board dimensions:</Typography>
         <Box style={{'marginTop': '1rem'}}>
@@ -73,4 +74,4 @@ const withDimensionScreen = (WrappedComponent) => {
   };
 };
 
-export default withDimensionScreen;
+export {withDimensionScreen};

@@ -27,7 +27,6 @@ test('it initially displays N x N `null` squares, where N is the dimension of th
   render(<Board board={board} boardDimension={BOARD_DIMENSION}/>);
 
   (screen.getAllByRole('button')).forEach( element => {
-    // console.log(element.textContent);
     expect(element.textContent).toBe('');
   });
 });
@@ -55,8 +54,6 @@ test('the current player switches when a square on the board is clicked', () => 
   const mockFunc = jest.fn();
 
   render(<Board board={board} boardDimension={BOARD_DIMENSION} setBoard={mockFunc} handleTurn={() => setPlayer(currentPlayer)} currentPlayer={currentPlayer}/>);
-
-  // render(<Board boardDimension={BOARD_DIMENSION} handleTurn={() => setPlayer(currentPlayer)} currentPlayer={currentPlayer}/>);
 
   const squaresArray = screen.getAllByRole('button');
   const randomSquare = squaresArray[Math.floor(Math.random() * (squaresArray.length - 0) + 0)];

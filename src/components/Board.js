@@ -55,12 +55,12 @@ const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, dis
                   key={columnIndex}
                   move={board[position]}
                   onClick={() => {
-                    handleTurn(updateTurn(currentPlayer))
+                    handleTurn(updateTurn(currentPlayer));
                     const newBoard = updateBoard(board, rowIndex, columnIndex, playerMoveMapping[`${currentPlayer}`]);
                     setBoard(newBoard);
                   }}
                 />
-              )
+              );
             })}
           </div>
         );

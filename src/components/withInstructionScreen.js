@@ -57,4 +57,4 @@ const withInstructionScreen = (WrappedComponent) => {
   };
 };
 
-export default withInstructionScreen;
+export { withInstructionScreen };
