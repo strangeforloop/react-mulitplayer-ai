@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Square } from './Square';
 import { gameStatus } from '../utils/gameOverConditions';
+import PropTypes from 'prop-types';
 
 const playerMoveMapping = {
   'playerOne': 'x',
@@ -67,6 +68,17 @@ const Board = ({ board, setBoard, boardDimension, currentPlayer, handleTurn, dis
       })}
     </div>
   );
+};
+
+Board.propTypes = {
+  board: PropTypes.array,
+  setBoard: PropTypes.func,
+  boardDimension: PropTypes.number,
+  currentPlayer: PropTypes.string,
+  handleTurn: PropTypes.func,
+  disabled: PropTypes.bool,
+  setIsGameOver: PropTypes.func,
+  setWinningPlayer: PropTypes.func
 };
 
 export { Board };

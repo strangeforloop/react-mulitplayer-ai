@@ -1,7 +1,7 @@
 import React from 'react';
 import { Square } from './Square';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event'
+import userEvent from '@testing-library/user-event';
 
 const topLeftStyle = '';
 const topRightStyle = '';

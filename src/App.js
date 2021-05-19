@@ -5,6 +5,7 @@ import { withDimensionScreen } from './components/withDimensionScreen';
 import { withInstructionScreen } from './components/withInstructionScreen';
 import { Grid, Button, ThemeProvider } from '@material-ui/core';
 import { playBestMove } from './utils/helpers';
+import PropTypes from 'prop-types';
 
 import theme from './utils/theme';
 
@@ -55,6 +56,11 @@ const App = ({ numberOfPlayers, dimension }) => {
       </div>
     </ThemeProvider>
   );
+};
+
+App.propTypes = {
+  numberOfPlayers: PropTypes.number,
+  dimension: PropTypes.number
 };
 
 export default withDimensionScreen(withInstructionScreen(App));

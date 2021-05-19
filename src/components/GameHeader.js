@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import startCase from 'lodash.startcase';
 import { Typography, Fade } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const GameHeader = ({ isGameOver, currentPlayer, winningPlayer, dimension }) => {
   const formatPlayer = (player) => {
@@ -23,6 +24,13 @@ const GameHeader = ({ isGameOver, currentPlayer, winningPlayer, dimension }) => 
       }
     </div>
   );
+};
+
+GameHeader.propTypes = {
+  isGameOver: PropTypes.func,
+  currentPlayer: PropTypes.string,
+  winningPlayer: PropTypes.string,
+  dimension: PropTypes.number
 };
 
 export { GameHeader };

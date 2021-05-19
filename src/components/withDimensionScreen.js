@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Button, TextField, ThemeProvider, Typography } from '@material-ui/core';
 import { useState } from 'react';
 import theme from '../utils/theme';
+import PropTypes from 'prop-types';
 
 const StartScreen = ({setNewInstance, setDimension}) => {
   const [disabled, setDisabled] = useState(true);
@@ -52,7 +53,7 @@ const StartScreen = ({setNewInstance, setDimension}) => {
             }}
             error={!isValidInput}
             onKeyDown={ event => {
-              if ((event.key === 'Enter') && isValidDimension(event.target.value)) setNewInstance(false)
+              if ((event.key === 'Enter') && isValidDimension(event.target.value)) setNewInstance(false);
             }}
             style={{ 'marginBottom': '1rem' }}
           />
@@ -72,6 +73,11 @@ const withDimensionScreen = (WrappedComponent) => {
     if (newInstance) return <StartScreen setNewInstance={setNewInstance} setDimension={setDimension}/>;
     return <WrappedComponent dimension={dimension}/>;
   };
+};
+
+StartScreen.propTypes = {
+  setNewInstance: PropTypes.bool,
+  setDimension: PropTypes.func
 };
 
 export {withDimensionScreen};

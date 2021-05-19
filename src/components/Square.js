@@ -1,5 +1,6 @@
 import React, { Button } from '@material-ui/core';
 import "./Square.css";
+import PropTypes from 'prop-types';
 
 const Square = ({ move, onClick, disabled, borderRadiusStyle }) => {
   // const handler = disabled => disabled ? undefined : onClick
@@ -16,6 +17,13 @@ const Square = ({ move, onClick, disabled, borderRadiusStyle }) => {
       </Button>
     </div>
   );
+};
+
+Square.propTypes = {
+  move: PropTypes.string,
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool,
+  borderRadiusStyle: PropTypes.object
 };
 
 export { Square };

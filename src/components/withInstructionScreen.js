@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Grid, Link, ThemeProvider, Typography } from '@material-ui/core';
 import theme from '../utils/theme';
+import PropTypes from 'prop-types';
 
 const ChoosePlayerNumberScreen = ({ dimension, setNumberOfPlayers, setPlayerNumberWasChosen }) => {
   return (
@@ -55,6 +56,11 @@ const withInstructionScreen = (WrappedComponent) => {
     if (!playerNumberWasChosen) return <ChoosePlayerNumberScreen dimension={dimension} setNumberOfPlayers={setNumberOfPlayers} setPlayerNumberWasChosen={setPlayerNumberWasChosen} />;
     return <WrappedComponent numberOfPlayers={numberOfPlayers} dimension={dimension} />;
   };
+};
+ChoosePlayerNumberScreen.propTypes = {
+  dimension: PropTypes.number,
+  setNumberOfPlayers: PropTypes.func,
+  setPlayerNumberWasChosen: PropTypes.bool
 };
 
 export { withInstructionScreen };

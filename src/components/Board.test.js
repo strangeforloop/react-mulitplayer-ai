@@ -1,7 +1,7 @@
 import React from 'react';
 import { Board } from './Board';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event'
+import userEvent from '@testing-library/user-event';
 
 test('<Board /> renders without crashing', () => {
   const BOARD_DIMENSION = 4;
