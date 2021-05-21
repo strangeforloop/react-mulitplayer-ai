@@ -5,10 +5,10 @@ If the user choses a 3x3 board, they have the option to play against a human or 
 <br><br>
 The AI player uses the MiniMax algorithm, a backtracking algorithm that will always find the optimal move.
 
-# :video_game: Play the Game! :video_game:	
+## :video_game: Play the Game! :video_game:	
 [Click here to view the application](https://strangeforloop.github.io/react-mulitplayer-ai/)
 
-## What I Learned
+## :black_small_square:	What I Learned
 ### Testing via React Testing Library
 (Coming soon . . .)
 
